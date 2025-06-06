@@ -6,7 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #e5eefb; }
+        body {
+            background: #e5eefb;
+            min-height: 100vh;
+            position: relative;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        /* Logo nền phủ full màn nghiêng nhẹ, luôn đủ góc, lặp đều */
+        .bg-logo-bg {
+            pointer-events: none;
+            position: fixed;
+            z-index: 0;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            overflow: hidden;
+        }
+        .bg-logo-bg-inner {
+            position: absolute;
+            left: 50%; top: 50%;
+            width: 200vw;
+            height: 200vh;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            background-image: url('https://i.postimg.cc/yd4v4YHG/EZ-LOGO-31.png');
+            background-repeat: repeat;
+            background-size: 120px auto;
+            opacity: 0.07;
+            will-change: transform;
+        }
+        .logo-on-top {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0.7rem;
+            position: relative;
+            z-index: 2;
+        }
+        .logo-on-top img {
+            height: 56px;
+            width: auto;
+            opacity: 0.96;
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px 0 rgba(0,0,0,0.06);
+            border: 1px solid #bee3f8;
+            padding: 2rem;
+            position: relative;
+            z-index: 3;
+        }
+        .company-info {
+            background: #fff;
+            border-radius: 12px;
+            margin-top: 2.3rem;
+            box-shadow: 0 2px 10px 0 rgba(0,0,0,0.06);
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        .company-info h2 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #da1a32;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .company-info .en {
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.25em;
+            letter-spacing: 0.01em;
+        }
+        .company-info .line {
+            font-size: 1.08em;
+        }
+        .company-info .label {
+            font-weight: 600;
+        }
+        .label-en {
+            font-size:0.98em;
+            color:#2563eb;
+            font-weight: 500;
+            display:block;
+            margin-bottom:0.16em;
+            margin-top:0.05em;
+            letter-spacing: 0.01em;
+        }
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto;
@@ -24,19 +111,25 @@
             position: absolute; top: 6px; right: 18px; cursor: pointer;
         }
         .close-button:hover { color: #f87171; }
-        .label-en {
-            font-size:0.98em;
-            color:#2563eb;
-            font-weight: 500;
-            display:block;
-            margin-bottom:0.16em;
-            margin-top:0.05em;
-            letter-spacing: 0.01em;
+        @media (max-width: 520px) {
+            .form-container, .company-info {
+                padding: 0.7rem !important;
+                border-radius: 8px;
+            }
+            .modal-content {
+                padding: 1rem !important;
+            }
         }
     </style>
 </head>
 <body class="p-4 sm:p-8">
-    <div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-blue-200 mt-6">
+    <!-- Logo nền phủ full màn nghiêng nhẹ, luôn đủ góc -->
+    <div class="bg-logo-bg"><div class="bg-logo-bg-inner"></div></div>
+    <!-- Logo nổi trên cùng -->
+    <div class="logo-on-top">
+        <img src="https://i.postimg.cc/VvSyGkBV/EZ-LOGO-08.png" alt="EZ Maya Logo">
+    </div>
+    <div class="form-container max-w-3xl mx-auto mt-6">
         <h1 class="text-3xl font-extrabold text-center text-blue-900 mb-6 tracking-widest uppercase">
             ĐƠN ĐĂNG KÝ THUÊ THIẾT BỊ WIFI
             <br>
@@ -48,17 +141,14 @@
                 Please fill in the Wi-Fi device rental information below. You can add multiple requests at once.
             </span>
         </p>
-
         <!-- Rental Requests Container -->
         <div id="rental-requests-container" class="space-y-8 mb-8"></div>
-
         <div class="flex justify-center mb-8">
             <button id="add-request-btn" type="button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 text-md">
                 + Thêm đơn đăng ký mới
                 <span class="label-en text-white/90">+ Add new rental request</span>
             </button>
         </div>
-
         <h2 class="text-2xl font-semibold text-blue-800 mb-6 border-b pb-3">
             Thông tin liên hệ của người gửi yêu cầu
             <span class="label-en">Contact information of the requester</span>
@@ -100,7 +190,6 @@
                 <input type="text" id="tax-code" name="tax-code" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Mã số thuế công ty / Company tax code">
             </div>
         </div>
-
         <div class="flex justify-center">
             <button id="submit-form-btn" type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition duration-300 text-lg">
                 <span id="submit-text">
@@ -111,7 +200,25 @@
             </button>
         </div>
     </div>
-
+    <!-- Thông tin công ty -->
+    <div class="company-info max-w-3xl mx-auto">
+        <h2>CÔNG TY TNHH MAYA VIETNAM</h2>
+        <div class="en"><b>MAYA VIETNAM CO., LTD</b></div>
+        <div class="line">
+            <span class="label">ĐỊA CHỈ / ADDRESS:</span>
+            PHÒNG 1630, TẦNG 16, DAEHA BUSINESS CENTER, 360 KIM MÃ, NGỌC KHÁNH, BA ĐÌNH, HÀ NỘI.<br>
+            <span class="label-en">ROOM 1630, 16TH FLOOR, DAEHA BUSINESS CENTER, 360 KIM MA, NGOC KHANH, BA DINH, HANOI.</span>
+        </div>
+        <div class="line">
+            <span class="label">HOTLINE (VIETNAMESE):</span>
+            0962 000 650 &nbsp;&nbsp;&nbsp;
+            <span class="label">HOTLINE (JAPANESE):</span>
+            0365 399 288
+        </div>
+        <div style="color:#2563eb; font-size:0.97em; margin-top:0.5em;">
+            For support in English or Japanese, please contact the above numbers.
+        </div>
+    </div>
     <div id="statusModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -121,7 +228,6 @@
             </button>
         </div>
     </div>
-
     <script>
         // Dán URL Google Apps Script Web App của bạn vào đây:
         const GOOGLE_APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzKqJAE6UgKusyBtfnUF2NuT9hut5JorzaLqg9oAenCLlPyF6YFI69sRcMKbYGcdGo8xg/exec';
