@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>ĐĂNG KÝ THUÊ THIẾT BỊ WIFI</title>
+    <title>ĐƠN ĐĂNG KÝ THUÊ THIẾT BỊ WIFI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -38,12 +38,12 @@
 <body class="p-4 sm:p-8">
     <div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-blue-200 mt-6">
         <h1 class="text-3xl font-extrabold text-center text-blue-900 mb-6 tracking-widest uppercase">
-            ĐĂNG KÝ THUÊ THIẾT BỊ WIFI
+            ĐƠN ĐĂNG KÝ THUÊ THIẾT BỊ WIFI
             <br>
-            <span class="text-lg font-bold label-en uppercase">WIFI DEVICE RENTAL REGISTRATION</span>
+            <span class="text-lg font-bold label-en uppercase">WIFI DEVICE RENTAL REGISTRATION FORM</span>
         </h1>
         <p class="text-blue-900 text-center mb-8 font-medium">
-            Vui lòng điền thông tin người thuê thiết bị Wi-Fi dưới đây. Quý khách có thể thêm nhiều đơn đăng ký cùng lúc.
+            Vui lòng điền thông tin thuê thiết bị Wi-Fi dưới đây. Quý khách có thể thêm nhiều đơn đăng ký cùng lúc.
             <span class="label-en">
                 Please fill in the Wi-Fi device rental information below. You can add multiple requests at once.
             </span>
@@ -92,6 +92,13 @@
                 </label>
                 <input type="text" id="company-name" name="company-name" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Tên công ty của bạn / Your company">
             </div>
+            <div>
+                <label for="tax-code" class="block text-blue-800 text-sm font-semibold mb-2">
+                    Mã số thuế
+                    <span class="label-en">Tax Code</span>
+                </label>
+                <input type="text" id="tax-code" name="tax-code" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Mã số thuế công ty / Company tax code">
+            </div>
         </div>
 
         <div class="flex justify-center">
@@ -117,7 +124,7 @@
 
     <script>
         // Dán URL Google Apps Script Web App của bạn vào đây:
-        const GOOGLE_APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzLkFvpuHQTnl3DqlNrzTPV83uPMMteW34ebyXrIfhjKFbo7E-PODSvNDiqkzTAGvrG4w/exec';
+        const GOOGLE_APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzKqJAE6UgKusyBtfnUF2NuT9hut5JorzaLqg9oAenCLlPyF6YFI69sRcMKbYGcdGo8xg/exec';
 
         function showModal(message) {
             const modal = document.getElementById('statusModal');
@@ -165,17 +172,24 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="user-name-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
-                                Tên người dùng
-                                <span class="label-en">User Name</span>
+                                Tên người nhận
+                                <span class="label-en">Recipient Name</span>
                             </label>
-                            <input type="text" id="user-name-${requestCounter}" name="user-name-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền tên người dùng / Enter user name" required>
+                            <input type="text" id="user-name-${requestCounter}" name="user-name-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Tên người nhận thiết bị / Recipient name" required>
                         </div>
                         <div>
-                            <label for="imei-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
-                                IMEI
-                                <span class="label-en">IMEI</span>
+                            <label for="recipient-phone-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Số điện thoại người nhận
+                                <span class="label-en">Recipient Phone</span>
                             </label>
-                            <input type="text" id="imei-${requestCounter}" name="imei-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền số IMEI / Enter IMEI" required>
+                            <input type="text" id="recipient-phone-${requestCounter}" name="recipient-phone-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="SĐT người nhận thiết bị / Recipient phone" required>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label for="recipient-address-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Địa chỉ nhận thiết bị
+                                <span class="label-en">Recipient Address</span>
+                            </label>
+                            <input type="text" id="recipient-address-${requestCounter}" name="recipient-address-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Địa chỉ nhận thiết bị / Device delivery address" required>
                         </div>
                         <div>
                             <label for="usage-date-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
@@ -203,13 +217,6 @@
                                 <option value="10GB/tháng">10GB/tháng / 10GB/month</option>
                                 <option value="20GB/tháng">20GB/tháng / 20GB/month</option>
                             </select>
-                        </div>
-                        <div class="col-span-1 md:col-span-2">
-                            <label for="tax-code-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
-                                Mã số thuế
-                                <span class="label-en">Tax Code</span>
-                            </label>
-                            <input type="text" id="tax-code-${requestCounter}" name="tax-code-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền mã số thuế / Enter tax code">
                         </div>
                     </div>
                 `;
@@ -267,7 +274,8 @@
                         name: document.getElementById('sender-name').value,
                         email: document.getElementById('sender-email').value,
                         phone: document.getElementById('sender-phone').value,
-                        company: document.getElementById('company-name').value
+                        company: document.getElementById('company-name').value,
+                        taxCode: document.getElementById('tax-code').value
                     },
                     rentalRequests: []
                 };
@@ -277,11 +285,11 @@
                     formData.rentalRequests.push({
                         requestNumber: n,
                         userName: document.getElementById(`user-name-${n}`).value,
-                        imei: document.getElementById(`imei-${n}`).value,
+                        recipientPhone: document.getElementById(`recipient-phone-${n}`).value,
+                        recipientAddress: document.getElementById(`recipient-address-${n}`).value,
                         usageDate: document.getElementById(`usage-date-${n}`).value,
                         country: document.getElementById(`country-${n}`).value,
-                        dataPackage: document.getElementById(`data-package-${n}`).value,
-                        taxCode: document.getElementById(`tax-code-${n}`).value
+                        dataPackage: document.getElementById(`data-package-${n}`).value
                     });
                 });
 
