@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #f3f4f6; }
+        body { background: #e5eefb; }
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto;
@@ -14,26 +14,36 @@
             align-items: center; justify-content: center;
         }
         .modal-content {
-            background-color: #fefefe; margin: auto; padding: 30px; border-radius: 12px;
-            width: 90%; max-width: 400px; text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fefefe; margin: auto; padding: 32px; border-radius: 14px;
+            width: 92%; max-width: 420px; text-align: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.13);
             position: relative;
         }
         .close-button {
             color: #aaa; float: right; font-size: 24px; font-weight: bold;
             position: absolute; top: 6px; right: 18px; cursor: pointer;
         }
-        .close-button:hover { color: black; }
-        .label-en {font-size:0.92em; color:#64748b; display:block; margin-bottom:0.2em}
+        .close-button:hover { color: #f87171; }
+        .label-en {
+            font-size:0.98em;
+            color:#2563eb;
+            font-weight: 500;
+            display:block;
+            margin-bottom:0.16em;
+            margin-top:0.05em;
+            letter-spacing: 0.01em;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
-    <div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-200 mt-6">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">ĐĂNG KÝ THUÊ THIẾT BỊ WIFI<br>
-            <span class="text-base font-medium text-gray-500 uppercase tracking-widest">WIFI DEVICE RENTAL REGISTRATION</span>
+    <div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-blue-200 mt-6">
+        <h1 class="text-3xl font-extrabold text-center text-blue-900 mb-6 tracking-widest uppercase">
+            ĐĂNG KÝ THUÊ THIẾT BỊ WIFI
+            <br>
+            <span class="text-lg font-bold label-en uppercase">WIFI DEVICE RENTAL REGISTRATION</span>
         </h1>
-        <p class="text-gray-600 text-center mb-8">
-            Vui lòng điền thông tin người thuê thiết bị Wi-Fi dưới đây. Quý khách có thể thêm nhiều đơn đăng ký cùng lúc.<br>
+        <p class="text-blue-900 text-center mb-8 font-medium">
+            Vui lòng điền thông tin người thuê thiết bị Wi-Fi dưới đây. Quý khách có thể thêm nhiều đơn đăng ký cùng lúc.
             <span class="label-en">
                 Please fill in the Wi-Fi device rental information below. You can add multiple requests at once.
             </span>
@@ -43,52 +53,52 @@
         <div id="rental-requests-container" class="space-y-8 mb-8"></div>
 
         <div class="flex justify-center mb-8">
-            <button id="add-request-btn" type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg shadow-md transition duration-300">
-                + Thêm đơn đăng ký mới<br>
-                <span class="label-en">+ Add new rental request</span>
+            <button id="add-request-btn" type="button" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 text-md">
+                + Thêm đơn đăng ký mới
+                <span class="label-en text-white/90">+ Add new rental request</span>
             </button>
         </div>
 
-        <h2 class="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3">
-            Thông tin liên hệ của người gửi yêu cầu<br>
+        <h2 class="text-2xl font-semibold text-blue-800 mb-6 border-b pb-3">
+            Thông tin liên hệ của người gửi yêu cầu
             <span class="label-en">Contact information of the requester</span>
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-                <label for="sender-name" class="block text-gray-700 text-sm font-medium mb-2">
-                    Họ và tên<br>
+                <label for="sender-name" class="block text-blue-800 text-sm font-semibold mb-2">
+                    Họ và tên
                     <span class="label-en">Full Name</span>
                 </label>
-                <input type="text" id="sender-name" name="sender-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Họ và tên của bạn / Your full name" required>
+                <input type="text" id="sender-name" name="sender-name" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Họ và tên của bạn / Your full name" required>
             </div>
             <div>
-                <label for="sender-email" class="block text-gray-700 text-sm font-medium mb-2">
-                    Email<br>
+                <label for="sender-email" class="block text-blue-800 text-sm font-semibold mb-2">
+                    Email
                     <span class="label-en">Email</span>
                 </label>
-                <input type="email" id="sender-email" name="sender-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="email@congty.com / email@company.com" required>
+                <input type="email" id="sender-email" name="sender-email" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="email@congty.com / email@company.com" required>
             </div>
             <div>
-                <label for="sender-phone" class="block text-gray-700 text-sm font-medium mb-2">
-                    Số điện thoại<br>
+                <label for="sender-phone" class="block text-blue-800 text-sm font-semibold mb-2">
+                    Số điện thoại
                     <span class="label-en">Phone Number</span>
                 </label>
-                <input type="tel" id="sender-phone" name="sender-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Số điện thoại của bạn / Your phone number">
+                <input type="tel" id="sender-phone" name="sender-phone" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Số điện thoại của bạn / Your phone number">
             </div>
             <div>
-                <label for="company-name" class="block text-gray-700 text-sm font-medium mb-2">
-                    Tên công ty<br>
+                <label for="company-name" class="block text-blue-800 text-sm font-semibold mb-2">
+                    Tên công ty
                     <span class="label-en">Company Name</span>
                 </label>
-                <input type="text" id="company-name" name="company-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Tên công ty của bạn / Your company">
+                <input type="text" id="company-name" name="company-name" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Tên công ty của bạn / Your company">
             </div>
         </div>
 
         <div class="flex justify-center">
-            <button id="submit-form-btn" type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition duration-300">
+            <button id="submit-form-btn" type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-xl transition duration-300 text-lg">
                 <span id="submit-text">
-                    Gửi Yêu Cầu<br>
-                    <span class="label-en">Submit Request</span>
+                    Gửi Yêu Cầu
+                    <span class="label-en text-white/90">Submit Request</span>
                 </span>
                 <span id="loading-spinner" class="hidden inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white ml-2"></span>
             </button>
@@ -98,7 +108,7 @@
     <div id="statusModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <p id="modal-message" class="text-lg font-semibold text-gray-800"></p>
+            <p id="modal-message" class="text-lg font-semibold text-blue-800"></p>
             <button id="modal-close-btn" class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">
                 Đóng / Close
             </button>
@@ -141,52 +151,52 @@
             function createRentalRequestSection() {
                 requestCounter++;
                 const section = document.createElement('div');
-                section.className = 'bg-white p-6 rounded-lg shadow-sm border border-gray-200';
+                section.className = 'bg-blue-50 p-6 rounded-lg shadow-sm border border-blue-200';
                 section.id = `request-${requestCounter}`;
 
                 section.innerHTML = `
                     <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-semibold text-gray-700">
-                            Đơn ${requestCounter}<br>
+                        <h2 class="text-xl font-bold text-blue-800">
+                            Đơn ${requestCounter}
                             <span class="label-en">Request ${requestCounter}</span>
                         </h2>
-                        ${requestCounter > 1 ? `<button type="button" class="remove-request-btn text-red-500 hover:text-red-700 font-medium text-sm" title="Xóa đơn này">Xóa<br><span class="label-en">Remove</span></button>` : ''}
+                        ${requestCounter > 1 ? `<button type="button" class="remove-request-btn text-red-500 hover:text-red-700 font-semibold text-sm" title="Xóa đơn này">Xóa <span class="label-en text-red-400">Remove</span></button>` : ''}
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="user-name-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                Tên người dùng<br>
+                            <label for="user-name-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Tên người dùng
                                 <span class="label-en">User Name</span>
                             </label>
-                            <input type="text" id="user-name-${requestCounter}" name="user-name-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Điền tên người dùng / Enter user name" required>
+                            <input type="text" id="user-name-${requestCounter}" name="user-name-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền tên người dùng / Enter user name" required>
                         </div>
                         <div>
-                            <label for="imei-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                IMEI<br>
+                            <label for="imei-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                IMEI
                                 <span class="label-en">IMEI</span>
                             </label>
-                            <input type="text" id="imei-${requestCounter}" name="imei-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Điền số IMEI / Enter IMEI" required>
+                            <input type="text" id="imei-${requestCounter}" name="imei-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền số IMEI / Enter IMEI" required>
                         </div>
                         <div>
-                            <label for="usage-date-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                Ngày sử dụng<br>
+                            <label for="usage-date-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Ngày sử dụng
                                 <span class="label-en">Usage Date</span>
                             </label>
-                            <input type="text" id="usage-date-${requestCounter}" name="usage-date-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="VD: 11/06 - 21/06 / e.g., 11/06 - 21/06" required>
+                            <input type="text" id="usage-date-${requestCounter}" name="usage-date-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="VD: 11/06 - 21/06 / e.g., 11/06 - 21/06" required>
                         </div>
                         <div>
-                            <label for="country-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                Quốc gia<br>
+                            <label for="country-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Quốc gia
                                 <span class="label-en">Country</span>
                             </label>
-                            <input type="text" id="country-${requestCounter}" name="country-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Điền tên quốc gia / Enter country" required>
+                            <input type="text" id="country-${requestCounter}" name="country-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền tên quốc gia / Enter country" required>
                         </div>
                         <div>
-                            <label for="data-package-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                Gói data<br>
+                            <label for="data-package-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Gói data
                                 <span class="label-en">Data Package</span>
                             </label>
-                            <select id="data-package-${requestCounter}" name="data-package-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                            <select id="data-package-${requestCounter}" name="data-package-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" required>
                                 <option value="">-- Chọn gói data / Select data package --</option>
                                 <option value="1GB/ngày">1GB/ngày / 1GB/day</option>
                                 <option value="5GB/ngày">5GB/ngày / 5GB/day</option>
@@ -195,11 +205,11 @@
                             </select>
                         </div>
                         <div class="col-span-1 md:col-span-2">
-                            <label for="tax-code-${requestCounter}" class="block text-gray-700 text-sm font-medium mb-2">
-                                Mã số thuế<br>
+                            <label for="tax-code-${requestCounter}" class="block text-blue-800 text-sm font-semibold mb-2">
+                                Mã số thuế
                                 <span class="label-en">Tax Code</span>
                             </label>
-                            <input type="text" id="tax-code-${requestCounter}" name="tax-code-${requestCounter}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Điền mã số thuế / Enter tax code">
+                            <input type="text" id="tax-code-${requestCounter}" name="tax-code-${requestCounter}" class="w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" placeholder="Điền mã số thuế / Enter tax code">
                         </div>
                     </div>
                 `;
@@ -213,10 +223,10 @@
             }
 
             function updateSectionNumbers() {
-                const sections = rentalRequestsContainer.querySelectorAll('.bg-white.p-6');
+                const sections = rentalRequestsContainer.querySelectorAll('.bg-blue-50.p-6');
                 sections.forEach((section, idx) => {
                     const num = idx + 1;
-                    section.querySelector('h2').innerHTML = `Đơn ${num}<br><span class="label-en">Request ${num}</span>`;
+                    section.querySelector('h2').innerHTML = `Đơn ${num} <span class="label-en">Request ${num}</span>`;
                     section.querySelectorAll('input,select').forEach(input => {
                         let base = input.id.replace(/-\d+$/, '');
                         input.id = `${base}-${num}`;
@@ -262,7 +272,7 @@
                     rentalRequests: []
                 };
 
-                rentalRequestsContainer.querySelectorAll('.bg-white.p-6').forEach((section, idx) => {
+                rentalRequestsContainer.querySelectorAll('.bg-blue-50.p-6').forEach((section, idx) => {
                     const n = idx + 1;
                     formData.rentalRequests.push({
                         requestNumber: n,
