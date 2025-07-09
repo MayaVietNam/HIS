@@ -202,7 +202,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         // --- CONFIG ---
-        const PACKAGE_LIST = ["500MB/ngày", "1GB/ngày", "Không giới hạn"];
+        const PACKAGE_LIST = ["500MB/ngày", "1GB/ngày", "5GB/ngày"];
         const COUNTRY_LIST = typeof PRICE_TABLE !== 'undefined' ? Object.keys(PRICE_TABLE).sort() : [];
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrwabvQsJHJXNw38_8apLHFIEX3veKBTSSpgJWAfR8jQHzCcYMQodI7x__FeWUzK5cfQ/exec';
 
@@ -259,7 +259,7 @@
                 <option value="">-- Chọn gói data --</option>
                 <option value="500MB/ngày">500MB/ngày / 500MB/day</option>
                 <option value="1GB/ngày">1GB/ngày / 1GB/day</option>
-                <option value="Không giới hạn">Không giới hạn / Unlimited</option>
+                <option value="5GB/ngày">5GB/ngày / 5GB/ngày</option>
             </select>`;
 
         // Hàm populateDistricts đã bị loại bỏ vì không cần chức năng quận/huyện.
