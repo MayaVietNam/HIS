@@ -206,9 +206,6 @@
         const COUNTRY_LIST = typeof PRICE_TABLE !== 'undefined' ? Object.keys(PRICE_TABLE).sort() : [];
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrwabvQsJHJXNw38_8apLHFIEX3veKBTSSpgJWAfR8jQHzCcYMQodI7x__FeWUzK5cfQ/exec';
 
-        // KHÔNG CẦN đối tượng DISTRICTS vì chức năng quận/huyện đã bị loại bỏ.
-        // const DISTRICTS = { ... };
-
         // --- ELEMENTS ---
         const form = document.getElementById('wifi-form');
         const container = document.getElementById('rental-requests-container');
@@ -217,10 +214,6 @@
         const submitText = document.getElementById('submit-text');
         const loadingSpinner = document.getElementById('loading-spinner');
         const senderRegionSelect = document.getElementById('sender-region');
-        // Các phần tử liên quan đến quận/huyện đã bị loại bỏ:
-        // const senderDistrictGroup = document.getElementById('sender-district-group');
-        // const senderDistrictSelect = document.getElementById('sender-district');
-
 
         let requestCounter = 0;
 
@@ -262,9 +255,6 @@
                 <option value="5GB/ngày">5GB/ngày / 5GB/ngày</option>
             </select>`;
 
-        // Hàm populateDistricts đã bị loại bỏ vì không cần chức năng quận/huyện.
-        // const populateDistricts = () => { ... };
-
         // --- CORE LOGIC ---
         function updatePriceForSection(section) {
             const country = section.querySelector('.choices-country').value;
@@ -273,7 +263,7 @@
             const to = section.querySelector('.date-to').value;
             const daysInput = section.querySelector('.days-input');
 
-            const priceInfo = section.querySelector('.price-info'); // Di chuyển dòng này vào đây
+            const priceInfo = section.querySelector('.price-info');
 
             const days = calcDays(from, to);
             daysInput.value = days;
@@ -302,7 +292,6 @@
                 const n = idx + 1;
                 section.dataset.requestNumber = n;
                 section.querySelector('h2.request-title').innerHTML = `Đơn ${n} <span class="label-en">Request ${n}</span>`;
-                // Show remove button for all but the first section
                 const removeBtn = section.querySelector('.remove-request-btn');
                 if (removeBtn) removeBtn.style.display = sections.length > 1 ? 'inline-block' : 'none';
             });
@@ -327,8 +316,8 @@
                         <input type="text" class="user-name-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" required>
                     </div>
                     <div>
-                         <label class="block text-blue-800 text-sm font-semibold mb-2">IMEI <span class="label-en">IMEI</span></label>
-    <input type="text" class="imei-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900">
+                        <label class="block text-blue-800 text-sm font-semibold mb-2">IMEI <span class="label-en">IMEI</span></label>
+                        <input type="text" class="imei-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900">
                     </div>
                     <div>
                         <label class="block text-blue-800 text-sm font-semibold mb-2">Từ ngày <span class="label-en">From date</span></label>
@@ -362,7 +351,7 @@
             // Initialize Choices.js for the new select
             new Choices(section.querySelector('.choices-country'), { 
                 searchEnabled: true, 
-                shouldSort: false, // Already sorted
+                shouldSort: false,
                 itemSelectText: 'Chọn' 
             });
 
@@ -372,7 +361,6 @@
         // --- EVENT LISTENERS ---
         addRequestBtn.addEventListener('click', createRentalRequestSection);
         
-        // Event Delegation for price calculation and removal
         container.addEventListener('change', (e) => {
             if (e.target.matches('.choices-country, .package-select, .date-from, .date-to')) {
                 const section = e.target.closest('section.rental-request');
@@ -386,7 +374,6 @@
             if (e.target.matches('.remove-request-btn, .remove-request-btn *')) {
                 const section = e.target.closest('section.rental-request');
                 if (section) {
-                    // Properly destroy Choices instance before removing element
                     const choicesInstance = section.querySelector('.choices-country').choices;
                     if (choicesInstance) {
                         choicesInstance.destroy();
@@ -396,9 +383,6 @@
                 }
             }
         });
-
-        // Hàm populateDistricts() đã bị loại bỏ nên không cần event listener này.
-        // senderRegionSelect.addEventListener('change', populateDistricts);
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -415,16 +399,13 @@
                 phone: document.getElementById('sender-phone').value.trim(),
                 company: document.getElementById('sender-company').value.trim(),
                 region: senderRegionSelect.value.trim(),
-                // Không cần trường district nữa
-                // district: senderDistrictSelect.value.trim(), 
                 taxCode: document.getElementById('sender-taxcode').value.trim()
             };
 
             // --- Validation ---
-            // Loại bỏ kiểm tra district khỏi điều kiện validation
             if (!senderInfo.name || !senderInfo.email || !senderInfo.phone || !senderInfo.region) {
                 Swal.fire("Thiếu thông tin", "Vui lòng nhập đủ Họ tên, Email, Số điện thoại và Khu vực của người gửi.", "warning");
-                setSubmitState(true); // Re-enable form
+                setSubmitState(true);
                 return;
             }
 
@@ -450,7 +431,7 @@
                 const request = {
                     requestNumber: section.dataset.requestNumber,
                     userName: section.querySelector('.user-name-input').value.trim(),
-                    imei: section.querySelector('.imei-input').value.trim(),
+                    imei: section.querySelector('.imei-input').value.trim(), // Vẫn thu thập nhưng không bắt buộc
                     fromDate: from,
                     toDate: to,
                     days: days,
@@ -463,10 +444,9 @@
                     grandTotal: price ? price.grandTotal : ""
                 };
 
-              if (!request.userName || !request.fromDate || !request.toDate || !request.country || !request.dataPackage) {
-    isFormValid = false;
-}
-// IMEI không còn là trường bắt buộc
+                // Không kiểm tra imei trong validation
+                if (!request.userName || !request.fromDate || !request.toDate || !request.country || !request.dataPackage) {
+                    isFormValid = false;
                 }
                 rentalRequests.push(request);
             });
@@ -487,24 +467,21 @@
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important for sending to Google Apps Script
+                    mode: 'no-cors',
                     cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
                 
-                // Because of 'no-cors' mode, we won't get a real response back.
-                // We assume success if the request doesn't throw an error.
                 Swal.fire("Thành công!", "Đơn đăng ký đã được gửi đi.<br>Vui lòng kiểm tra email để xem báo giá chi tiết.", "success");
                 form.reset();
-                container.innerHTML = ''; // Clear all requests
-                createRentalRequestSection(); // Add a fresh one
-                // Không cần gọi populateDistricts() nữa
+                container.innerHTML = '';
+                createRentalRequestSection();
                 
             } catch (err) {
                 Swal.fire("Lỗi", "Không thể gửi đơn đăng ký. Vui lòng kiểm tra kết nối mạng và thử lại.", "error");
             } finally {
-                setSubmitState(true); // Re-enable form in all cases
+                setSubmitState(true);
             }
         });
         
@@ -516,7 +493,6 @@
 
         // --- INITIALIZE ---
         createRentalRequestSection();
-        // Không cần gọi populateDistricts() khi khởi tạo
     });
     </script>
 </body>
