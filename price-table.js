@@ -1,8 +1,8 @@
 const PRICE_TABLE = {
-  "Nhật Bản": { "500MB/ngày": 110500 },
-  "Hàn Quốc": { "500MB/ngày": 110500 },
-  "Đài Loan": { "500MB/ngày": 110500 },
-  "Việt Nam": { "500MB/ngày": 110500 },
+  "Nhật Bản": { "5GB/ngày": 110500 },
+  "Hàn Quốc": { "5GB/ngày": 110500 },
+  "Đài Loan": { "5GB/ngày": 110500 },
+  "Việt Nam": { "5GB/ngày": 110500 },
   "Trung Quốc (Không có VPN)": { "500MB/ngày": 110500, "5GB/ngày": 153000 },
   "Campuchia": { "500MB/ngày": 110500, "5GB/ngày": 153000 },
   "Malaysia": { "500MB/ngày": 110500, "5GB/ngày": 153000 },
