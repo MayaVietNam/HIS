@@ -327,8 +327,8 @@
                         <input type="text" class="user-name-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" required>
                     </div>
                     <div>
-                        <label class="block text-blue-800 text-sm font-semibold mb-2">IMEI <span class="label-en">IMEI</span></label>
-                        <input type="text" class="imei-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900" required>
+                         <label class="block text-blue-800 text-sm font-semibold mb-2">IMEI <span class="label-en">IMEI</span></label>
+    <input type="text" class="imei-input w-full px-4 py-2 border border-blue-300 rounded-lg text-blue-900">
                     </div>
                     <div>
                         <label class="block text-blue-800 text-sm font-semibold mb-2">Từ ngày <span class="label-en">From date</span></label>
@@ -463,8 +463,10 @@
                     grandTotal: price ? price.grandTotal : ""
                 };
 
-                if (!request.userName || !request.imei || !request.fromDate || !request.toDate || !request.country || !request.dataPackage) {
-                    isFormValid = false;
+              if (!request.userName || !request.fromDate || !request.toDate || !request.country || !request.dataPackage) {
+    isFormValid = false;
+}
+// IMEI không còn là trường bắt buộc
                 }
                 rentalRequests.push(request);
             });
